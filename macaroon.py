@@ -48,7 +48,6 @@ class Macaroon:
         print self.hmac.hexdigest()
 
     def verify(self,key):
-        print "---------------"
         cave = self.caveats
         h = HMAC.new(str(key))
         temp = h
@@ -57,11 +56,5 @@ class Macaroon:
             cave = cave.cav
             temp = h
             h = HMAC.new(temp.hexdigest())
-        if(temp.hexdigest() == self.hmac.hexdigest()):
-            print "Worked!!!"
-        else:
-            print "Oothikuchu"
-            
-        print temp.hexdigest()==self.hmac.hexdigest()
-        print self.hmac.hexdigest()
+
 
