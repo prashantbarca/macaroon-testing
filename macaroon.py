@@ -9,8 +9,9 @@
 """
 
 """
-from Crypto.Hash import HMAC
+from Crypto.Hash  import MD5,SHA,SHA256
 import random 
+algo = SHA256 #MD5, SHA, SHA256
 class Caveat:
     def __init__(self,r):
         self.rule = r
@@ -35,9 +36,9 @@ class Macaroon:
         else:
             self.caveats=cav
         if(self.hmac!=None):
-            temp_h = HMAC.new(self.hmac.hexdigest())
+            temp_h = algo.new(self.hmac.hexdigest())
         else:
-            temp_h = HMAC.new(str(key))
+            temp_h = algo.new(str(key))
         temp_h.update(cav.rule)
         self.hmac = temp_h
     def printing(self):
@@ -49,12 +50,13 @@ class Macaroon:
 
     def verify(self,key):
         cave = self.caveats
-        h = HMAC.new(str(key))
+        h = algo.new(str(key))
         temp = h
         while(cave!=None):
             h.update(cave.rule)
             cave = cave.cav
             temp = h
-            h = HMAC.new(temp.hexdigest())
+            h = algo.new(temp.hexdigest())
+        print temp.hexdigest() == self.hmac.hexdigest()
 
 

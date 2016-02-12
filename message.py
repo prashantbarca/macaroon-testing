@@ -37,6 +37,6 @@ for i in range(10):
     m.verify(key)
     avg_verify= avg_verify+ time.time()-start_time
 
-print "Mint : ", avg_mint*100
-print "Verify :",avg_verify*100
+print "Mint : ", avg_mint/10
+print "Verify :",avg_verify/10
 
